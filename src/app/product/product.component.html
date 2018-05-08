@@ -1,0 +1,91 @@
+<div class="well">
+	<form class="form-inline" action="/action_page.php">
+	    <div class="form-group">
+	      	<label for="email">Product Name:</label>
+	      	<input type="text" class="form-control" [(ngModel)]="product.name" name="name">
+	    </div>
+	    <div class="form-group">
+	      	<label for="pwd">Product Code:</label>
+	      	<input type="text" class="form-control" name="code" [(ngModel)]="product.code">
+	    </div>
+	    <div class="form-group">
+	      	<label for="pwd">Product Price:</label>
+	      	<input type="number" class="form-control" name="price" [(ngModel)]="product.price">
+	    </div>
+	    <div class="form-group">
+	      	<label for="pwd">Product Category:</label>
+			<select class="form-control" name="role" [(ngModel)]="product.category" (ngModelChange)="productChange(product.category)">
+			  <option *ngFor="let category of categoryList"  [ngValue]="category.id">
+          		{{ category.value }}
+        </option>
+			</select>	    
+		</div>
+        <div class="form-group">
+            <label for="pwd">Product Sub Category:</label>
+            <select class="form-control" name="role" [(ngModel)]="product.subcategory">
+              <option value="Select Sub Category" selected="selected">Select Sub Category</option>
+              <option *ngFor="let category of subCategory"  [ngValue]="category.id">
+                {{ category.value }}
+        </option>
+            </select>       
+        </div>
+	    
+
+	    <div class="checkbox">
+	      	<label><input type="checkbox" name="available" [(ngModel)]="product.madeAvailable" isChecked="product.madeAvailable"> Made Available</label>
+	    </div>
+	    <button type="submit" class="btn btn-default" class="btn btn-primary mb-2" (click)="addProduct(product)">Add Product</button>
+	</form>
+
+</div>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Product Name</th>
+        <th>Product Code</th>
+        <th>Product Price(in $)</th>
+        <th>Product Available</th>
+        <th>Product Category</th>
+        <th>Created On</th>
+        <th>Updated On</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList" ad-host>
+        <td>{{product.name}}</td>
+        <td>{{product.code}}</td>
+        <td>{{product.price}}</td>
+        <td>
+            <label ><input tr-row type="checkbox" name="available" [(ngModel)]="product.isAvailable" isChecked="product.isAvailable" (click)="makeAvailable(product)" [product]="product"></label>
+        </td>
+        <td>{{product.category | categoryPipe:categoryList}}</td>
+        <!-- <td>{{product.createdAt |  date:'yyyy-MM-dd'}}</td> -->
+        <td>{{product.createdAt |  dateFormat}}</td>
+        <td>{{product.updatedAt |  dateFormat}}</td>
+        <td><span class="glyphicon glyphicon-edit" (click)="editProduct(product)"></span></td>
+        <td><span class="glyphicon glyphicon-remove" (click)="deleteProduct(product._id)"></span></td>
+      </tr>      
+    </tbody>
+</table>
+<div cs-modal id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,68 @@
+<!-- <div>
+  
+</div>
+
+<div class="well">
+  <div row>
+    <button (click)="setFlag(loginFlag)">Login</button>
+    <button (click)="setFlag(loginFlag)">SignUp</button>
+  </div> -->
+<div class="row col-md-12" *ngIf="loginFlag">
+  <div class="panel panel-default col.md-6">
+    <div class="panel-heading">
+      <h2 class="text-center">Login</h2>
+    </div>
+    <div class="panel-body">
+      <form *ngIf="!isLoggedIn" class="form-horizontal">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="email" type="text" class="form-control" [(ngModel)]="login.userName" name="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="password" type="password" class="form-control" [(ngModel)]="login.password" name="password" placeholder="Password">
+        </div><br>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+          <a href="#"> Forgot Password?</a>
+        </label>
+        <div class="clearfix">
+          <button type="submit" class="btn btn-primary mb-2 cancelbtn" (click)="submitLogin(login)">Login</button>
+          <button type="submit" class="btn btn-primary mb-2 signupbtn" (click)="setFlag(loginFlag)">Sign Up</button>
+
+        </div>
+              </form>
+    </div>
+  </div>
+</div>
+
+<div class="row col-md-12" *ngIf="!loginFlag">
+  <div class="panel panel-default col.md-6">
+    <div class="panel-heading">
+      <h2 class="text-center">Sign Up</h2>
+    </div>
+    <div class="panel-body">
+      <form *ngIf="!isLoggedIn" class="form-horizontal">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="text" type="text" class="form-control" [(ngModel)]="signup.userName" name="email" placeholder="Username" (keyup)="checkUserExist(signup.userName)">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input id="email" type="text" class="form-control" [(ngModel)]="signup.email" name="email" placeholder="Email">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input id="password" type="password" class="form-control" [(ngModel)]="signup.password" name="password" placeholder="Password">
+        </div>
+        <br>
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        <div class="clearfix">
+          <button type="submit" class="btn btn-primary mb-2 signupbtn" (click)="submitSignUp(signup)">Sign Up</button>
+          <button type="submit" class="btn btn-primary mb-2 cancelbtn" (click)="setFlag(loginFlag)">Login</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
